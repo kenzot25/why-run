@@ -1,0 +1,38 @@
+{
+  "name": "why-run",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Trace function calls to understand why they ran",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "build": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces",
+    "test": "npm run test --workspaces",
+    "test:core": "npm run test --workspace=@why-run/core",
+    "test:panel": "npm run test --workspace=@why-run/panel",
+    "test:react": "npm run test --workspace=@why-run/react",
+    "lint": "eslint packages/**/*.ts",
+    "typecheck": "tsc --noEmit",
+    "demo": "npm run dev --workspace=why-run-react-demo"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.8.3",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

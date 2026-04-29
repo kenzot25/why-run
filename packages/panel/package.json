@@ -1,0 +1,30 @@
+{
+  "name": "@why-run/panel",
+  "version": "0.1.0",
+  "description": "Floating panel UI for why-run",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts && cp src/style.css dist/",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@why-run/core": "^0.1.0"
+  },
+  "devDependencies": {
+    "jsdom": "^23.2.0",
+    "tsup": "^8.0.0",
+    "vitest": "^1.0.0"
+  }
+}
