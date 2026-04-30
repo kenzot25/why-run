@@ -163,10 +163,10 @@ describe("complex scenarios", () => {
       // Should have 3 flakyCall nodes (2 errors + 1 success)
       expect(flakyNodes).toHaveLength(3)
 
-      // All should have durations
+      // All should have durations (allow 0 for very fast operations in CI)
       flakyNodes.forEach((n) => {
         expect(n.duration).toBeDefined()
-        expect(n.duration).toBeGreaterThan(0)
+        expect(n.duration).toBeGreaterThanOrEqual(0)
       })
 
       expect(result).toEqual({ success: true, attempt: 3 })
