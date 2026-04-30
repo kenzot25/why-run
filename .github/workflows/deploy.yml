@@ -1,0 +1,95 @@
+name: Deploy Demos to GitHub Pages
+
+on:
+  push:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build packages
+        run: npm run build
+
+      - name: Build React Demo
+        run: |
+          cd examples/react-demo
+          npm run build
+          mkdir -p ../../dist/react-demo
+          cp -r dist/* ../../dist/react-demo/
+
+      - name: Build Complex Demo
+        run: |
+          cd examples/complex-demo
+          npm run build
+          mkdir -p ../../dist/complex-demo
+          cp -r dist/* ../../dist/complex-demo/
+
+      - name: Create index page
+        run: |
+          cat > dist/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Why Run - Tracing Tool Demos</title>
+            <style>
+              body { font-family: -apple-system, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+              h1 { color: #333; }
+              .demo { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+              a { display: inline-block; padding: 10px 20px; background: #007acc; color: white; text-decoration: none; border-radius: 4px; }
+              a:hover { background: #005fa3; }
+            </style>
+          </head>
+          <body>
+            <h1>Why Run - Tracing Tool Demos</h1>
+            <div class="demo">
+              <h2>Simple Demo</h2>
+              <p>Basic trace functionality with user fetch</p>
+              <a href="/why-run/react-demo/">View Demo</a>
+            </div>
+            <div class="demo">
+              <h2>Complex Stress Test</h2>
+              <p>Deep chains, parallel ops, error handling, race conditions</p>
+              <a href="/why-run/complex-demo/">View Demo</a>
+            </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
