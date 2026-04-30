@@ -14,7 +14,6 @@ export function useTracedCallback<T extends (...args: any[]) => any>(
     trace(name, (...args: Parameters<T>) => fnRef.current(...args))
   ).current
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   return useCallback(
     ((...args: Parameters<T>) => tracedFn(...args)) as T,
     deps
