@@ -18,7 +18,8 @@
     "test:react": "npm run test --workspace=@why-run/react",
     "lint": "eslint packages/**/*.ts",
     "typecheck": "tsc --noEmit",
-    "demo": "npm run dev --workspace=why-run-react-demo"
+    "demo": "npm run dev --workspace=why-run-react-demo",
+    "demo:complex": "npm run dev --workspace=complex-demo"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
