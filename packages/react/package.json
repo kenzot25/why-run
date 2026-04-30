@@ -20,7 +20,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@why-run/core": "^0.1.0"
+    "@why-run/core": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.0.0"

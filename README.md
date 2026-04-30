@@ -39,11 +39,11 @@ const onClick = trace("onClick", () => {
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| `@why-run/core` | Core tracing functionality |
-| `@why-run/panel` | Floating debug panel UI |
-| `@why-run/react` | React hooks integration |
+| Package          | Description                |
+| ---------------- | -------------------------- |
+| `@why-run/core`  | Core tracing functionality |
+| `@why-run/panel` | Floating debug panel UI    |
+| `@why-run/react` | React hooks integration    |
 
 ## React Example
 
@@ -51,13 +51,34 @@ const onClick = trace("onClick", () => {
 import { useTracedCallback } from "@why-run/react"
 
 function Component() {
-  const handleClick = useTracedCallback("handleClick", async () => {
-    await fetchUser(123)
-  }, [])
+  const handleClick = useTracedCallback(
+    "handleClick",
+    async () => {
+      await fetchUser(123)
+    },
+    []
+  )
 
   return <button onClick={handleClick}>Load User</button>
 }
 ```
+
+## Claude Code Skill (Optional)
+
+Install the `why-run-debugger` skill to get AI-powered analysis of your traces:
+
+```bash
+npx why-run install-skill
+```
+
+Once installed, ask Claude questions like:
+
+- "why did fetchUser run?"
+- "analyze my traces"
+- "what's slow in my code?"
+- "help me understand this call chain"
+
+The skill automatically finds your trace exports and provides visual call trees + performance insights.
 
 ## Development
 

@@ -11,9 +11,9 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@why-run/core": "^0.1.0",
-    "@why-run/panel": "^0.1.0",
-    "@why-run/react": "^0.1.0"
+    "@why-run/core": "workspace:*",
+    "@why-run/panel": "workspace:*",
+    "@why-run/react": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

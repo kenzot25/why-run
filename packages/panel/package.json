@@ -20,7 +20,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@why-run/core": "^0.1.0"
+    "@why-run/core": "workspace:*"
   },
   "devDependencies": {
     "jsdom": "^23.2.0",

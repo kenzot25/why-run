@@ -1,0 +1,29 @@
+{
+  "name": "@kenzot25/why-run",
+  "version": "0.1.1",
+  "description": "CLI for why-run - trace function calls to understand why they ran",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "why-run": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup src/cli.ts src/index.ts --format cjs,esm --dts --shims",
+    "dev": "tsup src/cli.ts src/index.ts --format cjs,esm --dts --watch --shims",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@why-run/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "vitest": "^1.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "files": [
+    "dist",
+    "skill",
+    "README.md"
+  ]
+}
