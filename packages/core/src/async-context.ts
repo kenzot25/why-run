@@ -12,8 +12,8 @@ class NodeAsyncLocalStorage<T> implements ContextStore<T> {
   constructor() {
     try {
       // Dynamic import to avoid browser bundling issues
-      const { AsyncLocalStorage } = require("async_hooks")
-      this.als = new AsyncLocalStorage<T>()
+      const asyncHooks = require("async_hooks")
+      this.als = new asyncHooks.AsyncLocalStorage()
     } catch {
       throw new Error("AsyncLocalStorage not available")
     }

@@ -9,9 +9,14 @@ export function useTracedCallback<T extends (...args: any[]) => any>(
   const fnRef = useRef(fn)
   fnRef.current = fn
 
+  // Create traced function once
+  const tracedFn = useRef(
+    trace(name, (...args: Parameters<T>) => fnRef.current(...args))
+  ).current
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useCallback(
-    trace(name, (...args: Parameters<T>) => fnRef.current(...args)),
+    ((...args: Parameters<T>) => tracedFn(...args)) as T,
     deps
   )
 }
