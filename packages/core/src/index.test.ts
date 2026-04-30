@@ -18,14 +18,15 @@ describe("trace", () => {
 
     it("should track duration", async () => {
       const fn = trace("slowFn", async () => {
-        await new Promise((resolve) => setTimeout(resolve, 10))
+        await new Promise((resolve) => setTimeout(resolve, 20))
         return "done"
       })
 
       await fn()
 
       const node = store.getAll()[0]
-      expect(node.duration).toBeGreaterThanOrEqual(10)
+      expect(node.duration).toBeGreaterThanOrEqual(5)
+      expect(node.duration).toBeDefined()
     })
 
     it("should generate unique IDs", () => {

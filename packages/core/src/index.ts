@@ -1,4 +1,4 @@
-import { AsyncLocalStorage } from "async_hooks"
+import { contextStore as rawContextStore } from "./async-context"
 
 export interface TraceNode {
   id: string
@@ -18,7 +18,10 @@ interface TraceContext {
   node: TraceNode
 }
 
-const asyncLocalStorage = new AsyncLocalStorage<TraceContext>()
+const contextStore = rawContextStore as {
+  getStore(): TraceContext | undefined
+  run<R>(context: TraceContext, fn: () => R): R
+}
 
 class TraceStore {
   nodes = new Map<string, TraceNode>()
@@ -62,7 +65,7 @@ export function trace<T extends (...args: any[]) => any>(
   fn: T
 ): T {
   return function (this: any, ...args: any[]) {
-    const parent = asyncLocalStorage.getStore()
+    const parent = contextStore.getStore()
     const startTime = Date.now()
 
     const node: TraceNode = {
@@ -81,7 +84,7 @@ export function trace<T extends (...args: any[]) => any>(
 
     const context: TraceContext = { node }
 
-    return asyncLocalStorage.run(context, () => {
+    return contextStore.run(context, () => {
       try {
         const result = fn.apply(this, args)
 
@@ -102,5 +105,5 @@ export function trace<T extends (...args: any[]) => any>(
 }
 
 export function getCurrentContext(): TraceNode | undefined {
-  return asyncLocalStorage.getStore()?.node
+  return contextStore.getStore()?.node
 }
