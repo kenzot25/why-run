@@ -14,7 +14,7 @@ When installed, this skill enables Claude to:
 ## Installation
 
 ```bash
-npx why-run install-skill
+npx @kenzot25/why-run install-skill
 ```
 
 ## Usage Examples

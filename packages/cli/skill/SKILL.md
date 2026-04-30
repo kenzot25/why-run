@@ -145,7 +145,7 @@ If the user asks to "add traces" or "help me understand this file":
 
 ```typescript
 // TRACE-START: Temporary traces for debugging - remove when done
-import { trace } from "why-run"
+import { trace } from "@kenzot25/why-run"
 
 const fetchUser = trace("fetchUser", async (id: string) => {
   // TRACE-END

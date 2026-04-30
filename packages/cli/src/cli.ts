@@ -66,7 +66,7 @@ function installSkill(): void {
   console.log('   - "debug this call chain"')
   console.log("")
   console.log("💡 Make sure you have why-run integrated in your project:")
-  console.log("   npm install why-run")
+  console.log("   npm install @kenzot25/why-run")
   console.log("")
   console.log("🔄 Reload Claude Code to pick up the new skill")
 }

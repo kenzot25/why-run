@@ -5,13 +5,13 @@ Trace function calls to understand **why they ran**.
 ## Quick Start
 
 ```bash
-npm install why-run
+npm install @kenzot25/why-run
 ```
 
 ```ts
-import { trace } from "why-run"
-import { initPanel } from "why-run/panel"
-import "why-run/panel/style.css"
+import { trace } from "@kenzot25/why-run"
+import { initPanel } from "@kenzot25/why-run/panel"
+import "@kenzot25/why-run/panel/style.css"
 
 // Start the debug panel (Ctrl+Shift+W)
 initPanel()
@@ -68,7 +68,7 @@ function Component() {
 Install the `why-run-debugger` skill to get AI-powered analysis of your traces:
 
 ```bash
-npx why-run install-skill
+npx @kenzot25/why-run install-skill
 ```
 
 Once installed, ask Claude questions like:
